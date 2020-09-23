@@ -1,0 +1,2 @@
+class CajaRegistradora(object):
+  pass  
