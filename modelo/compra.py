@@ -1,13 +1,11 @@
 from errores.error import CompraNoTieneProductosError
+from modelo.producto import Producto
 
 class Compra(object):
-  def __init__(self,stock):
+  def __init__(self):
     self.productos=[]
-    self.stock = []
-    self.stock = stock
-
-  def agregar(self,codigoProducto):
-    producto=self.stock.buscar(codigoProducto)
+    
+  def agregar(self,producto):
     self.productos.append(producto)
   
   def subtotal(self):
@@ -16,12 +14,14 @@ class Compra(object):
       subtotal+=producto.valor
     return subtotal
   
-  def finalizar(self):
+  def subtotalDescuentos(self):
     total=0
     if len(self.productos) == 0:
       raise CompraNoTieneProductosError
     else:
       for producto in self.productos:
-        total += producto.valor - producto.valor * producto.descuento / 100
+        total += producto.valor * producto.descuento / 100
     return total
+    
+
       
